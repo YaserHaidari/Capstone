@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { View, Text, Image, TextInput, Button, Alert } from "react-native";
+import {View, Text, Image, TextInput, Button, Alert, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform}
+  from "react-native";
 import { app } from "./firebase/firebse_initialize";
 import createUser from "./firebase/createUser";
 import { useRouter } from "expo-router";
@@ -144,57 +145,109 @@ export default function RegisterScreen() {
   }
 
   return (
-    <View style={{ padding: 20 }}>
-      <TextInput
-        placeholder="Name"
-        onChangeText={setName}
-        style={{ marginBottom: 10, padding: 10, borderWidth: 1 }}
-      />
-      <TextInput
-        placeholder="Email"
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        style={{ marginBottom: 10, padding: 10, borderWidth: 1 }}
-      />
-      <TextInput
-        placeholder="Password"
-        onChangeText={setPwd}
-        secureTextEntry
-        style={{ marginBottom: 10, padding: 10, borderWidth: 1 }}
-      />
+    <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0} // adjust this offset if needed
+        className="flex-1 bg-white"
+    >
+      <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+      >
 
-      <Button
-        onPress={pickImage}
-        title={imgUri ? "Change profile picture" : "Pick a profile picture"}
-        disabled={isUploading}
-      />
+        <Text
+            className="text-4xl font-bold font-Title text-black text-center pt-5 pb-8">Create New Account
+        </Text>
 
-      {imgUri && (
-        <Image
-          source={{ uri: imgUri }}
-          style={{ width: 200, height: 200, alignSelf: "center", margin: 10 }}
-        />
-      )}
+        <View className="flex-row justify-center items-center pb-10">
+          <Text className="text-lg font-Menu text-center">
+            Already registered?
+          </Text>
+          <TouchableOpacity onPress={navigaToLogin}>
+            <Text className="text-lg font-semibold font-Menu text-center text-primary pl-1">
+              Log in here
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      <Text style={{ color: "red", textAlign: "center", marginVertical: 10 }}>
-        {message}
-      </Text>
+        <View className=" mx-20 mb-5">
+          <SegmentedControl
+              values={["Student", "Tutor"]}
+              selectedIndex={userType}
+              onChange={(event) => {
+                setUsertype(event.nativeEvent.selectedSegmentIndex);
+              }}// Update the state with the selected index
+          />
+        </View>
 
-      <Button onPress={handleForm} title="Register" disabled={isUploading} />
-      <SegmentedControl
-        values={["Student", "Tutor"]}
-        backgroundColor="black"
-        selectedIndex={userType}
-        onChange={(event) => {
-          setUsertype(event.nativeEvent.selectedSegmentIndex); // Update the state with the selected index
-        }}
-      />
-      <Button
-        onPress={navigaToLogin}
-        title="Already have an account? Login"
-        color="gray"
-      />
-    </View>
+        <Text className="text-base font-bold font-Menu pl-11">Name</Text>
+        <View className="flex-row items-center bg-gray-200 mx-10 px-4 rounded-lg h-14 mb-10">
+          <TextInput
+              className="flex-1 text-base font-Text text-gray-800"
+              placeholder="Full Name"
+              onChangeText={setName}
+          />
+        </View>
+
+        <Text className="text-base font-bold font-Menu pl-11">Email</Text>
+        <View className="flex-row items-center bg-gray-200 mx-10 px-4 rounded-lg h-14 mb-10">
+          <TextInput
+              className="flex-1 text-base font-Text text-gray-800"
+              placeholder="someone@example.com"
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+          />
+        </View>
+
+        <Text className="text-base font-bold font-Menu pl-11">Password</Text>
+        <View className="flex-row items-center bg-gray-200 mx-10 px-4 rounded-lg h-14 mb-10">
+          <TextInput
+              className="flex-1 text-base font-Text text-gray-800"
+              placeholder="Password"
+              onChangeText={setPwd}
+              secureTextEntry
+          />
+        </View>
+
+        <View className="mb-8">
+          <TouchableOpacity
+              onPress={pickImage}
+              disabled={isUploading}
+              className={`flex-row mx-20 px-4 rounded-lg h-14 items-center justify-center ${
+                  isUploading ? 'bg-gray-400' : 'bg-neutral-700'
+              }`}
+          >
+            <Text className="text-xl font-Menu text-white font-bold">
+              {imgUri ? 'Change Profile Picture' : 'Upload Profile Picture'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {imgUri && (
+          <Image
+            source={{ uri: imgUri }}
+            className="w-48 h-48 rounded-full self-center my-2"
+          />
+        )}
+
+        <Text
+            className="text-center text-red-600 my-4 font-medium text-base">
+          {message}
+        </Text>
+
+        <View className="mb-12">
+
+          <TouchableOpacity
+              onPress={handleForm}
+              disabled={isUploading}
+              className="flex-row bg-primary mx-10 px-4 rounded-lg h-14 items-center justify-center"
+          >
+            <Text className="text-2xl font-Menu text-white font-medium ">Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }

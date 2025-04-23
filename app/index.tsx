@@ -23,7 +23,7 @@ export default function HomeScreen() {
 
     // Example: Navigate to home after initialization
     setTimeout(() => {
-      router.push('/register');
+      router.push('/home');
     }, 2000);
     // Initialize user on app load
     initilizeUser();
