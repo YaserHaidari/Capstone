@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1094053580566",
+    "firebase_url": "https://cmc-db-9077c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cmc-db-9077c",
+    "storage_bucket": "cmc-db-9077c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094053580566:android:b5b17fe2500bb9975c8a37",
+        "android_client_info": {
+          "package_name": "com.capstone.cmc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrwi7eSYqqwnB2BQ2vAK0A9w0lhCZOj5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
