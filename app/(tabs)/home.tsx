@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, ScrollView, Image } from "react-native";
+import { View, Text, TextInput, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 import { getAuth } from "firebase/auth";
 import {
   getDatabase,
@@ -14,6 +14,7 @@ import UserInfo from "../firebase/getUserInfo";
 import { supabase } from "@/app/supabase/initiliaze";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
+import CustomHeader from "@/components/CustomHeader";
 
 function HomeScreen() {
   const [welcomeMessage, setWelcomeMessage] = useState<String>("");
@@ -130,7 +131,8 @@ function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
       >
-        <Text className="text-4xl font-bold font-Title text-black text-center pt-5">
+        <CustomHeader />
+        <Text className="text-4xl font-bold font-Title text-black text-center pt-2">
           Coffee Meets Careers {welcomeMessage}
         </Text>
         {photoUrl ? (

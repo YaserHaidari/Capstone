@@ -1,10 +1,12 @@
-import { View, Text, TextInput, Image } from "react-native";
+import {View, Text, TextInput, Image, ScrollView} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import CustomHeader from "@/components/CustomHeader";
 
 function FindMentorsScreen() {
   return (
-    <View className="bg-gray-100">
-      <View className='flex-row self-center items-center mt-4 p-2 bg-gray-200 w-5/6 rounded-full'>
+    <ScrollView className="flex-1 bg-white">
+        <CustomHeader />
+      <View className='flex-row self-center items-center mt-4 p-2 w-5/6 rounded-full'>
         <Ionicons name='search' size={20} className='ml-2' color="black" />
         <TextInput
         placeholder='Search'
@@ -99,7 +101,7 @@ function FindMentorsScreen() {
           </Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

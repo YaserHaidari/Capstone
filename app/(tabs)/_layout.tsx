@@ -1,3 +1,4 @@
+{/*
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 
@@ -25,7 +26,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="users" color={color} />,
         }}
       />
-      {/* Settings Tab */}
       <Tabs.Screen
         name="profile" // This will look for a file at app/(tabs)/settings.tsx
         options={{
@@ -35,4 +35,27 @@ export default function TabLayout() {
       />
     </Tabs>
   );
+}
+
+*/}
+
+// app/_layout.tsx
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import tabsNavigation from "@/app/(tabs)/tabsNavigation";
+import findmentors from "@/app/findmentors";
+
+const Drawer = createDrawerNavigator();
+
+export default function RootLayout() {
+    return (
+        <GestureHandlerRootView>
+            <Drawer.Navigator screenOptions={{ headerShown: false }}>
+                {/* Tabs inside drawer */}
+                <Drawer.Screen name="Home Page" component={tabsNavigation} />
+                <Drawer.Screen name="Find Mentors" component={findmentors} />
+            </Drawer.Navigator>
+        </GestureHandlerRootView>
+    );
 }
